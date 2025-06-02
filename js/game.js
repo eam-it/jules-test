@@ -59,8 +59,8 @@ class GameScene extends Phaser.Scene {
             if (this.isGameOver) return;
             if (!this.ballLaunched) {
                 this.ballLaunched = true;
-                this.ball.setVelocityY(-300);
-                this.ball.setVelocityX(Phaser.Math.Between(-150, 150));
+                this.ball.body.setVelocityY(-300);
+                this.ball.body.setVelocityX(Phaser.Math.Between(-150, 150));
             }
         }, this);
 
@@ -84,18 +84,18 @@ class GameScene extends Phaser.Scene {
         let diff = 0;
         if (ball.x < paddle.x) {
             diff = paddle.x - ball.x;
-            ball.setVelocityX(-6 * diff);
+            ball.body.setVelocityX(-6 * diff);
         } else if (ball.x > paddle.x) {
             diff = ball.x - paddle.x;
-            ball.setVelocityX(6 * diff);
+            ball.body.setVelocityX(6 * diff);
         } else {
-            ball.setVelocityX(Phaser.Math.Between(-10, 10));
+            ball.body.setVelocityX(Phaser.Math.Between(-10, 10));
         }
     }
 
     resetBallAndPaddle() {
         this.ballLaunched = false;
-        this.ball.setVelocity(0, 0);
+        this.ball.body.setVelocity(0, 0);
         this.paddle.x = this.game.config.width / 2;
         this.ball.x = this.paddle.x;
         // Position ball correctly above the paddle
