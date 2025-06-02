@@ -20,7 +20,7 @@ class GameScene extends Phaser.Scene {
         this.ball = this.add.circle(this.paddle.x, this.paddle.y - (this.paddle.height/2) - 10, 10, 0xff0000); // Adjusted initial Y
         this.physics.add.existing(this.ball);
         this.ball.body.collideWorldBounds = true; // Corrected way to set world bounds
-        this.ball.setBounce(1);
+        this.ball.body.bounce.set(1); // Corrected way to set bounce
         this.ball.body.onWorldBounds = true;
 
         this.ballLaunched = false;
