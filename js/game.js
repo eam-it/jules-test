@@ -70,7 +70,8 @@ class GameScene extends Phaser.Scene {
     }
 
     hitBrick(ball, brick) {
-        brick.disableBody(true, true);
+        brick.setVisible(false);
+        brick.body.setEnable(false);
         this.score += 10;
         this.scoreText.setText('Score: ' + this.score);
 
