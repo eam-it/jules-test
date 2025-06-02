@@ -15,12 +15,18 @@ class GameScene extends Phaser.Scene {
         // Paddle
         this.paddle = this.add.rectangle(this.game.config.width / 2, this.game.config.height - 50, 100, 20, 0xffffff);
         this.physics.add.existing(this.paddle, true); // Make paddle a static physics body
+        this.paddle.body.setImmovable(true);
+        this.paddle.body.pushable = false;
+        // Set custom physics body size for the paddle. Visual is 100x20.
+        // Physics body will be 100x40, meaning it extends 10px above and 10px below the visual.
+        this.paddle.body.setSize(100, 40);
 
         // Ball
         this.ball = this.add.circle(this.paddle.x, this.paddle.y - (this.paddle.height/2) - 10, 10, 0xff0000); // Adjusted initial Y
         this.physics.add.existing(this.ball);
         this.ball.body.collideWorldBounds = true; // Corrected way to set world bounds
         this.ball.body.bounce.set(1); // Corrected way to set bounce
+        this.ball.body.setMaxVelocity(500, 500); // Cap ball speed
         this.ball.body.onWorldBounds = true;
 
         this.ballLaunched = false;
